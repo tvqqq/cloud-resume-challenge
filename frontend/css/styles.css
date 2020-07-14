@@ -10547,6 +10547,10 @@ section.resume-section .resume-section-content {
   section.resume-section {
     min-height: 100vh;
   }
+
+  .colorful-bg {
+    background: -webkit-linear-gradient(#26D0CE, #1A2980);
+  }
 }
 @media (min-width: 992px) {
   section.resume-section {
