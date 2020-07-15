@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: My SAM App for Backend CLoud resume challenge.
+Parameters:
+  DynamoDBTableName:
+    Description: "The name of the DynamoDB table for the visitor count"
+    Type: String
+Resources:
+  # DynamoDB
+  DDBTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: !Ref DynamoDBTableName
+      PrimaryKey:
+        Name: id
+        Type: String
+
+  # Lambda role to access DynamoDB
+  VisitorCounterFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: dynamodbAccessRole
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+              - dynamodb:GetItem
+              - dynamodb:PutItem
+              - dynamodb:UpdateItem
+              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${DDBTable}"
+            - Effect: Allow
+              Action:
+              - logs:*
+              Resource: "*"
+
+  # Lambda Function
+  VisitorCountFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: visitor_count.lambda_handler
+      Runtime: python3.7
+      Role: !GetAtt VisitorCounterFunctionRole.Arn
+      Environment:
+          Variables: 
+            databaseName : !Ref DDBTable
+      Events:
+        VisitorCounter:
+          Type: Api
+          Properties:
+            Path: /visitor-count
+            Method: get
+
+    # TODO: 
+    # API Gateway
+    # Custom domain name
+    # Api Mapping
+
+Outputs:
+  VisitorCountApi:
+    Description: "API Gateway endpoint URL for Prod stage for Visitor Count function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/visitor-count/"

@@ -1,11 +1,15 @@
 import boto3
 import json
+import os
 
 
 def lambda_handler(event, context):
     # Init DynamoDB Client
     dynamodb = boto3.resource("dynamodb")
-    table = dynamodb.Table("tvq-cloud-resume-counter")
+    # Set dynamodb table name variable from env
+    ddbTableName = os.environ["databaseName"]
+    table = dynamodb.Table(ddbTableName)
+    # table = dynamodb.Table("tvq-cloud-resume-counter")
 
     # Atomic update item in table or add if doesn't exist
     ddbResponse = table.update_item(
