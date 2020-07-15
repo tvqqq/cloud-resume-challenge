@@ -1,1 +1,1 @@
-backend/.aws-sam
+*.aws-sam*
