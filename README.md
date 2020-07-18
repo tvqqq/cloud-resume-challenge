@@ -1,3 +1,1 @@
-
-Materials:
-- Template Resume for FE: https://startbootstrap.com/themes/resume
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">This is my writeup for the <a href="https://twitter.com/hashtag/CloudResumeChallenge?src=hash&amp;ref_src=twsrc%5Etfw">#CloudResumeChallenge</a> by <a href="https://twitter.com/forrestbrazeal?ref_src=twsrc%5Etfw">@forrestbrazeal</a> <a href="https://t.co/vJlBubm9mG">https://t.co/vJlBubm9mG</a><br><br>I like this challenge, so I take my free time every day to complete it. 🤜<br>Here is my result <a href="https://t.co/YPzFcOyEYO">https://t.co/YPzFcOyEYO</a> 👀</p>&mdash; Tat Vi Quyen (@tvqisme) <a href="https://twitter.com/tvqisme/status/1284321096355856384?ref_src=twsrc%5Etfw">July 18, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
